@@ -1,0 +1,27 @@
+Algorithm for Program 4:
+
+Step 1: Create an array of size 10
+Step 2: Initialize each array element with 0
+Step 3: Initialize the 2 variables front and rear as -1
+Step 4: Call The respective functions 
+
+Add rear():
+	
+	Step 1:Suppose we want to insert the next element from the rear. To insert the element from the rear end, we first need to increment the rear, i.e., rear=rear+1. Now, the rear is pointing to the second element, and the front is pointing to the first element.
+ 
+Step 2: Suppose we are again inserting the element from the rear end. To insert the element, we will first increment the rear, and now rear points to the third element.
+
+Add front():
+	Step 1: If we want to insert the element from the front end, and insert an element from the front, we have to decrement the value of front by 1. If we decrement the front by 1, then the front points to -1 location, which is not any valid location in an array. So, we set the front as (n -1), which is equal to 4 as n is 5. 
+
+Delete front():
+	Step 1: If the front is pointing to the last element of the array, and we want to perform the delete operation from the front. To delete any element from the front, we need to set front=front+1. Currently, the value of the front is equal to 4, and if we increment the value of front, it becomes 5 which is not a valid index. Therefore, we conclude that if front points to the last element, then front is set to 0 in case of delete operation.
+
+Delete rear():
+	Step 1: If we want to delete the element from rear end then we need to decrement the rear value by 1, i.e., rear=rear-1
+	Step 2: If the rear is pointing to the first element, and we want to delete the element from the rear end then we have to set rear=n-1 where n is the size of the array 
+
+Display():
+	Traverse through the array and print the elements
+Count():
+	Traverse Through the array and count the elementsand return the counter
