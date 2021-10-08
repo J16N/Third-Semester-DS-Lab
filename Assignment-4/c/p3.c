@@ -1,4 +1,9 @@
+#define ITEM char
+
 #include <stdio.h>
+#include "./stack.h"
+
+char get_pair(char);
 
 int main(void)
 {
@@ -6,17 +11,30 @@ int main(void)
     printf("---------------------------------------\n");
 
     int c;
+    Stack s = create();
+    bool balanced = true;
     printf("Expression: ");
-    int first = 0, second = 0, third = 0;
-    while ((c = getchar()) != '\n' && c != '\0' && c != EOF) {
-        if (c == '(') first++;
-        else if (c == '{') second++;
-        else if (c == '[') third++;
-        else if (c == ')' && first) first--;
-        else if (c == '}' && second) second--;
-        else if (c == ']' && third) third--;
+    while ((c = getchar()) != '\n' && c != EOF && balanced) {
+        if (c == '(' || c == '{' || c == '[')
+            push(s, c);
+
+        if (c == ')' || c == '}' || c == ']') {
+            if (is_empty(s))
+                balanced = false;
+            else {
+                char top = pop(s);
+                if (get_pair(c) != top)
+                    balanced = false;
+            }
+        }
     }
 
-    printf("%s Parenthesis\n", first || second || third ? "Unequal" : "Equal");
+    printf("%s Parenthesis\n", balanced ? "Equal" : "Unqual");
     return 0;
+}
+
+char get_pair(char c)
+{
+    int LUT[3] = {'(', '[', '{'};
+    return LUT[c % 41 % 10];
 }
