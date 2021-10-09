@@ -22,14 +22,15 @@ int main(void)
             if (is_empty(s))
                 balanced = false;
             else {
-                char top = pop(s);
+                ITEM top = pop(s);
                 if (get_pair(c) != top)
                     balanced = false;
             }
         }
     }
 
-    printf("%s Parenthesis\n", balanced ? "Equal" : "Unqual");
+    printf("%s Parenthesis\n", balanced && is_empty(s) ? "Equal" : "Unqual");
+    destroy(s);
     return 0;
 }
 

@@ -9,10 +9,11 @@ typedef struct node {
 
 struct stack_type {
     NODE *top;
+    int len;
 };
 
 static void terminate(const char *message) {
-    printf("%s\n", message);
+    printf("\n%s\n", message);
     exit(EXIT_FAILURE);
 }
 
@@ -20,6 +21,7 @@ Stack create(void)
 {
     Stack s = malloc(sizeof(struct stack_type));
     s->top = NULL;
+    s->len = 0;
     return s;
 }
 
@@ -54,6 +56,7 @@ void push(Stack s, ITEM data)
     new_node->data = data;
     new_node->next = s->top;
     s->top = new_node;
+    s->len++;
 }
 
 ITEM pop(Stack s)
@@ -65,5 +68,17 @@ ITEM pop(Stack s)
     ITEM data = temp->data;
     s->top = temp->next;
     free(temp);
+    s->len--;
     return data;
+}
+
+ITEM peek(Stack s)
+{
+    if ( !is_empty(s) )
+        return s->top->data;
+}
+
+int len(Stack s)
+{
+    return s->len;
 }

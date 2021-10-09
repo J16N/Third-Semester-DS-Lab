@@ -16,5 +16,7 @@ bool is_empty(Stack s);
 bool is_full(Stack s);
 void push(Stack s, ITEM i);
 ITEM pop(Stack s);
+ITEM peek(Stack s);
+int len(Stack s);
 
 #endif
