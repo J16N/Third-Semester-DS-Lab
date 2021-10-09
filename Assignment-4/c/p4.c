@@ -26,8 +26,9 @@ void insert_front(Deque, int);
 void overflow(void);
 void underflow(void);
 
-void display_from_front(Deque);
+void display_size(Deque);
 void display_from_rear(Deque);
+void display_from_front(Deque);
 
 void destroy(Deque);
 
@@ -48,50 +49,57 @@ int main(void)
     printf("<6> Delete element from back of DEQUE.\n");
     printf("<7> Get element from front of DEQUE.\n");
     printf("<8> Get element from back of DEQUE.\n");
-    printf("<0> Exit! \n\n");
+    printf("<9> Display size of Deque.\n");
+    printf("<0> Exit! \n");
 
-    while ( (choice = getchar()) != '0' ) {
+    printf("\nChoice: ");
+    while ( scanf("%d", &choice) != EOF && choice != 0 ) {
         switch (choice) {
-            case '1':
+            case 1:
                 display_from_front(d);
                 break;
 
-            case '2':
+            case 2:
                 display_from_rear(d);
                 break;
 
-            case '3':
+            case 3:
                 printf("Enter element to insert at front of DEQUE: ");
                 scanf("%d", &data);
                 insert_front(d, data);
                 break;
 
-            case '4':
+            case 4:
                 printf("Enter element to insert at back of DEQUE: ");
                 scanf("%d", &data);
                 insert_end(d, data);
                 break;
 
-            case '5':
+            case 5:
                 delete_front(d);
                 break;
 
-            case '6':
+            case 6:
                 delete_end(d);
                 break;
 
-            case '7':
+            case 7:
                 printf("Element at front of DEQUE: %d\n", get_front(d));
                 break;
 
-            case '8':
+            case 8:
                 printf("Element at back of DEQUE: %d\n", get_rear(d));
+                break;
+
+            case 9:
+                display_size(d);
                 break;
 
             default:
                 printf("Invalid choice!\n");
                 break;
         }
+        printf("\nChoice: ");
     }
 
     destroy(d);
@@ -138,6 +146,7 @@ void delete_end(Deque d)
     NODE *temp = d->rear;
     d->rear = d->rear->prev;
     d->rear->next = NULL;
+    d->size--;
     free(temp);
 }
 
@@ -149,12 +158,17 @@ void delete_front(Deque d)
     NODE *temp = d->front;
     d->front = d->front->next;
     d->front->prev = NULL;
+    d->size--;
     free(temp);
 }
 
 void insert_end(Deque d, int data)
 {
     NODE *temp = malloc( sizeof(NODE) );
+    if ( temp == NULL ) {
+        overflow();
+        return;
+    }
     temp->data = data;
     if ( is_empty(d) ) {
         d->front = temp;
@@ -164,14 +178,20 @@ void insert_end(Deque d, int data)
     }
     else {
         temp->next = NULL;
+        d->rear->next = temp;
         temp->prev = d->rear;
         d->rear = temp;
     }
+    d->size++;
 }
 
 void insert_front(Deque d, int data)
 {
     NODE *temp = malloc( sizeof(NODE) );
+    if ( temp == NULL ) {
+        overflow();
+        return;
+    }
     temp->data = data;
     if ( is_empty(d) ) {
         d->front = temp;
@@ -181,9 +201,11 @@ void insert_front(Deque d, int data)
     }
     else {
         temp->prev = NULL;
+        d->front->prev = temp;
         temp->next = d->front;
         d->front = temp;
     }
+    d->size++;
 }
 
 void overflow(void)
@@ -196,22 +218,31 @@ void underflow(void)
     printf("\n!!! UNDERFLOW !!!\n");
 }
 
+void display_size(Deque d)
+{
+    printf("\nSize of DEQUEN is: %d\n", d->size);
+}
+
 void display_from_front(Deque d)
 {
+    printf("\nDeque: ");
     NODE *temp = d->front;
     while ( temp != NULL ) {
-        printf("%d ", temp->data);
+        printf("%d, ", temp->data);
         temp = temp->next;
     }
+    printf("\n");
 }
 
 void display_from_rear(Deque d)
 {
+    printf("\nDeque: ");
     NODE *temp = d->rear;
     while ( temp != NULL ) {
-        printf("%d ", temp->data);
+        printf("%d, ", temp->data);
         temp = temp->prev;
     }
+    printf("\n");
 }
 
 void destroy(Deque d)
