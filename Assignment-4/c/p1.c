@@ -3,7 +3,7 @@
 #define IS_ALPHA(c) ( ((c) >= 'a' && (c) <= 'z') || ((c) >= 'A' && (c) <= 'Z') )
 
 #include <stdio.h>
-#include "./stack.h"
+#include "../../custom_headers/stack.h"
 
 int precedence(ITEM);
 

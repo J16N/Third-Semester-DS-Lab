@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "stack.h"
+#include "../../custom_headers/stack.h"
 
 int operand(void);
 

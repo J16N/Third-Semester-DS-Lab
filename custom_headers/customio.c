@@ -19,9 +19,9 @@ int *get_int_array(char *label, int *len)
     return arr;
 }
 
-void print_int_array(char *label, int *arr, int n)
+void print_int_array(char *label, int *arr, int low, int high)
 {
     printf("%s", label);
-    for (int i = 0; i < n; i++)
-        printf("%d%s", arr[i], i + 1 == n ? "\n" : ", ");
+    for (int i = low; i < high; i++)
+        printf("%d%s", arr[i], i + 1 == high ? "\n" : ", ");
 }

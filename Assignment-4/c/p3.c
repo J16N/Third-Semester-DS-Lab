@@ -1,7 +1,7 @@
 #define ITEM char
 
 #include <stdio.h>
-#include "./stack.h"
+#include "../../custom_headers/stack.h"
 
 char get_pair(char);
 
