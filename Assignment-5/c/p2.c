@@ -13,12 +13,15 @@ void quicksort(int *, int, int);
 
 int main(void)
 {
+    printf("\n---------- QUICK SORT ----------\n");
+    printf("--------------------------------\n");
+
     int len;
-    int *arr = get_int_array("Array: ", &len);
+    int *arr = get_int_array(" Array: ", &len);
     
     quicksort(arr, 0, len - 1);
 
-    print_int_array("Sorted Array: ", arr, 0, len);
+    print_int_array(" Sorted Array: ", arr, 0, len);
     free(arr);
 
     return 0;
@@ -38,8 +41,6 @@ int partition(int *arr, int low, int high)
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
-
-        print_int_array("Sub-array: ", arr, low, high + 1);
     }
 }
 

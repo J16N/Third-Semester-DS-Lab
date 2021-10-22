@@ -7,12 +7,15 @@ void mergesort(int *, int, int);
 
 int main(void)
 {
+    printf("\n---------- MERGE SORT ----------\n");
+    printf("--------------------------------\n");
+
     int len;
-    int *arr = get_int_array("Array: ", &len);
+    int *arr = get_int_array(" Array: ", &len);
 
     mergesort(arr, 0, len - 1);
 
-    print_int_array("Sorted Array: ", arr, 0, len);
+    print_int_array(" Sorted Array: ", arr, 0, len);
     free(arr);
 
     return 0;
